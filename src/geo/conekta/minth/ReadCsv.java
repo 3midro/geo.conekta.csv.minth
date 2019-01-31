@@ -37,7 +37,7 @@ public class ReadCsv extends Thread {
 	private String[] linea;
 	private boolean flagHeader;
 
-	static ArrayList arList = new ArrayList();
+	static ArrayList<String> arList = new ArrayList();
 	static String statuslog;
 	static int progressC;
 	String myLine = "";
