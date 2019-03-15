@@ -25,7 +25,7 @@ public class MainForm  {
 	private Text txtExtraerDe;
 	public static Display display = Display.getDefault();
 
-	String selected = "c:\\csv2extract\\";
+	String selected = "D:\\DATOS CSV EXTRACTOR 2\\";
 	
 	public static Label myOutput;
 	public static ProgressBar progressBar1;
@@ -69,29 +69,31 @@ public class MainForm  {
 	protected void createContents() {
 		shlExtraerTorqueY = new Shell(display,SWT.TITLE | SWT.CLOSE | SWT.BORDER);
 		shlExtraerTorqueY.setImage(SWTResourceManager.getImage(MainForm.class, "/geo/conekta/minth/ico48.ico"));
-		shlExtraerTorqueY.setSize(586, 321);
-		shlExtraerTorqueY.setText("Extraer Torque y \u00C1ngulo"); 
+		shlExtraerTorqueY.setSize(600, 401);
+		shlExtraerTorqueY.setText("Extraer Presión, Compresión, Torque y \u00C1ngulo"); 
 
 		txtExtraerDe = new Text(shlExtraerTorqueY, SWT.BORDER);
+		txtExtraerDe.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		txtExtraerDe.setEditable(false);
 		txtExtraerDe.setEnabled(false);
-		txtExtraerDe.setText("C:\\csv2extract");
-		txtExtraerDe.setBounds(75, 38, 336, 21);
+		txtExtraerDe.setText("D:\\DATOS CSV EXTRACTOR 2\\FILES X247 LH\\2017.11.23");
+		txtExtraerDe.setBounds(85, 38, 356, 30);
 		
 		Label lblNewLabel = new Label(shlExtraerTorqueY, SWT.NONE);
-		lblNewLabel.setBounds(34, 41, 35, 15);
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblNewLabel.setBounds(34, 41, 40, 30);
 		lblNewLabel.setText("Ruta");
 		
 		ScrolledComposite scrolledComposite = new ScrolledComposite(shlExtraerTorqueY, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setToolTipText("Current action");
-		scrolledComposite.setBounds(75, 76, 459, 132);
+		scrolledComposite.setBounds(85, 89, 488, 213);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		
 		myOutput = new Label( scrolledComposite, SWT.NONE );
 		myOutput.setBackground( display.getSystemColor( SWT.COLOR_WHITE ) );
-		myOutput.setSize( 400, 400 );
 		scrolledComposite.setContent(myOutput);
+		scrolledComposite.setMinSize(myOutput.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 		Button btnProcesar = new Button(shlExtraerTorqueY, SWT.NONE);
 		//crea el directorio csv2extract si no existe
@@ -120,7 +122,7 @@ public class MainForm  {
 					System.out.println(selected);
 				}
 		});
-		btnCambiarRuta.setBounds(417, 36, 35, 25);
+		btnCambiarRuta.setBounds(454, 41, 35, 30);
 		btnCambiarRuta.setText("...");
 		
         progressBar1 = new ProgressBar(shlExtraerTorqueY, SWT.HORIZONTAL);
@@ -160,18 +162,18 @@ public class MainForm  {
 					myProcess.start();
 			}
 		});
-		btnProcesar.setBounds(458, 36, 75, 25);
+		btnProcesar.setBounds(498, 39, 75, 35);
 		btnProcesar.setText("Procesar");
 		
 		Label lblLog = new Label(shlExtraerTorqueY, SWT.NONE);
-		lblLog.setBounds(34, 76, 35, 15);
+		lblLog.setBounds(34, 76, 35, 30);
 		lblLog.setText("Log");
 		
 
 		
 		ToolBar toolBar = new ToolBar(shlExtraerTorqueY, SWT.FLAT | SWT.RIGHT);
 		toolBar.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-		toolBar.setBounds(0, 0, 580, 23);
+		toolBar.setBounds(0, 0, 594, 23);
 		
 		ToolItem tltmManual = new ToolItem(toolBar, SWT.NONE);
 		tltmManual.addSelectionListener(new SelectionAdapter() {

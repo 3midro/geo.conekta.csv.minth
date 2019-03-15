@@ -147,72 +147,100 @@ public class ReadCsv extends Thread {
 				try {
 					System.out.println(fName);
 					fis = new FileInputStream(fName);
-					linea = new String[8];
-					linea[0] = ",";
+					linea = new String[24];
+					for (int p=0 ; p < 24 ; p++) {
+						linea[p] = ",";
+					}
+					/*linea[0] = ",";
 					linea[1] = ",";
 					linea[2] = ",";
 					linea[3] = ",";
 					linea[4] = ",";
 					linea[5] = ",";
 					linea[6] = ",";
-					linea[7] = ",";
+					linea[7] = ",";*/
 					DataInputStream myInput = new DataInputStream(fis);
+					double datoProcesado = 0;
 					while ((thisLine = myInput.readLine()) != null) {
 						String strar[] = thisLine.split(";");
 						if (strar.length > 1) {
-							if (strar[0].equals("par de torsión perno_exterior_izq")
-									|| strar[0].equals("torque dowel pin_outside_left")
-									|| strar[0].equals("Drehmoment Stehbolzen_Aussen_Li")) {
+							// presión Nieten 01 Spitzenwert Setzdruck ... Nieten 06 Spitzenwert Setzdruck
+							
+							if (strar[0].equals("Nieten 01 Spitzenwert Setzdruck"))
+									//|| strar[0].equals("torque dowel pin_outside_left")
+									//|| strar[0].equals("Drehmoment Stehbolzen_Aussen_Li"))
+									{
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[0] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								linea[0] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
 							}
-							if (strar[0].equals("ángulo perno_exterior_izq")
-									|| strar[0].equals("angle dowel pin_outside_left")
-									|| strar[0].equals("Winkel Stehbolzen_Aussen_Li")) {
+							if (strar[0].equals("Nieten 02 Spitzenwert Setzdruck")) {
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[1] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								linea[1] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
 							}
-							if (strar[0].equals("par de torsión perno_interior_izq")
-									|| strar[0].equals("torque dowel pin_inside_left")
-									|| strar[0].equals("Drehmoment Stehbolzen_Innen_Li")) {
+							if (strar[0].equals("Nieten 03 Spitzenwert Setzdruck")) {
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[2] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								linea[2] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
 							}
-							if (strar[0].equals("ángulo perno_interior_izq")
-									|| strar[0].equals("angle dowel pin_inside_left")
-									|| strar[0].equals("Winkel Stehbolzen_Innen_Li")) {
+							if (strar[0].equals("Nieten 04 Spitzenwert Setzdruck")) {
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[3] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								linea[3] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
 							}
-							if (strar[0].equals("par de torsión perno_interior_drch")
-									|| strar[0].equals("torque dowel pin_inside_right")
-									|| strar[0].equals("Drehmoment Stehbolzen_Innen_Re")) {
+							if (strar[0].equals("Nieten 05 Spitzenwert Setzdruck")) {
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[4] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								linea[4] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
 							}
-							if (strar[0].equals("ángulo perno_interior_drch")
-									|| strar[0].equals("angle dowel pin_inside_right")
-									|| strar[0].equals("Winkel Stehbolzen_Innen_Re")) {
+							if (strar[0].equals("Nieten 06 Spitzenwert Setzdruck")) {
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[5] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								linea[5] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
 							}
-							if (strar[0].equals("par de torsión perno_exterior_drch")
-									|| strar[0].equals("torque dowel pin_outside_right")
-									|| strar[0].equals("Drehmoment Stehbolzen_Aussen_Re")) {
+							
+							// compresión Nieten 01 Spitzenwert Setzhub ... Nieten 06 Spitzenwert Setzhub
+							
+							if (strar[0].equals("Nieten 01 Spitzenwert Setzhub")) {
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[6] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) / 100;
+								linea[6] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
 							}
-							if (strar[0].equals("ángulo perno_exterior_drch")
-									|| strar[0].equals("angle dowel pin_outside_right")
-									|| strar[0].equals("Winkel Stehbolzen_Aussen_Re")) {
+							if (strar[0].equals("Nieten 02 Spitzenwert Setzhub")) {
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[7] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) / 100;
+								linea[7] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
 							}
+							if (strar[0].equals("Nieten 03 Spitzenwert Setzhub")) {
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) / 100;
+								linea[8] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+							}
+							if (strar[0].equals("Nieten 04 Spitzenwert Setzhub")) {
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) / 100;
+								linea[9] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+							}
+							if (strar[0].equals("Nieten 05 Spitzenwert Setzhub")) {
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) / 100;
+								linea[10] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+							}
+							if (strar[0].equals("Nieten 06 Spitzenwert Setzhub")) {
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) / 100;
+								linea[11] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+							}
+							
 							i++;
 						}
 					}
-					myLine = myLine.concat(linea[0]).concat(linea[1]).concat(linea[2]).concat(linea[3]).concat(linea[4])
-							.concat(linea[5]).concat(linea[6]).concat(linea[7]);
+					for (int p=0 ; p < 24 ; p++) {
+						myLine = myLine.concat(linea[p]);
+					}
+					//myLine = myLine.concat(linea[0]).concat(linea[1]).concat(linea[2]).concat(linea[3]).concat(linea[4])
+						//	.concat(linea[5]).concat(linea[6]).concat(linea[7]);
 					System.out.println(myLine);
 				} catch (IOException e) {
 					e.printStackTrace();
