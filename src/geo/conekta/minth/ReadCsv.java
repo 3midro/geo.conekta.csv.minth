@@ -288,44 +288,14 @@ public class ReadCsv extends Thread {
 									break;
 							
 							}
-							/*
-							
-							
-							//Ángulo Verschrauben 01 Einschraubwinkel ... Verschrauben 06 Einschraubwinkel
-							if (strar[0].equals("Verschrauben 01 Einschraubwinkel")) {
-								strar[1] = strar[1].replaceAll(",",".");
-								linea[18] = strar[1] + ",";
-							}
-							if (strar[0].equals("Verschrauben 02 Einschraubwinkel")) {
-								strar[1] = strar[1].replaceAll(",",".");
-								linea[19] = strar[1] + ",";
-							}
-							if (strar[0].equals("Verschrauben 03 Einschraubwinkel")) {
-								strar[1] = strar[1].replaceAll(",",".");
-								linea[20] = strar[1] + ",";
-							}
-							if (strar[0].equals("Verschrauben 04 Einschraubwinkel")) {
-								strar[1] = strar[1].replaceAll(",",".");
-								linea[21] = strar[1] + ",";
-							}
-							if (strar[0].equals("Verschrauben 05 Einschraubwinkel")) {
-								strar[1] = strar[1].replaceAll(",",".");
-								linea[22] = strar[1] + ",";
-							}
-							if (strar[0].equals("Verschrauben 06 Einschraubwinkel")) {
-								strar[1] = strar[1].replaceAll(",",".");
-								linea[23] = strar[1] + ",";
-							}*/
-							
+														
 							i++;
 						}
 					}
 					for (int p=0 ; p < 24 ; p++) {
 						myLine = myLine.concat(linea[p]);
 					}
-					//myLine = myLine.concat(linea[0]).concat(linea[1]).concat(linea[2]).concat(linea[3]).concat(linea[4])
-						//	.concat(linea[5]).concat(linea[6]).concat(linea[7]);
-					//System.out.println(myLine);
+					myInput.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -416,7 +386,7 @@ public class ReadCsv extends Thread {
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
-
+							hwb.close();
 							statuslog = statuslog + " |  Hora Final: " + ft.format(myFecha);
 							statuslog = statuslog + "\nTiempo de Ejecución: " + tiempo;
 							String finalSize = size(countSize);
@@ -430,7 +400,6 @@ public class ReadCsv extends Thread {
 							statuslog = statuslog + "\nHora Final: " + ft.format(myFecha);
 							myOutput.setText(statuslog);
 						}
-
 						progressBar.setVisible(false);
 						text1.setVisible(false);
 						lblArchivoLeido.setVisible(false);

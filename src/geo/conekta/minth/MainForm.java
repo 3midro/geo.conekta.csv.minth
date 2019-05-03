@@ -68,12 +68,12 @@ public class MainForm  {
 	 */
 	protected void createContents() {
 		shlExtraerTorqueY = new Shell(display,SWT.TITLE | SWT.CLOSE | SWT.BORDER);
-		shlExtraerTorqueY.setImage(SWTResourceManager.getImage(MainForm.class, "/geo/conekta/minth/ico48.ico"));
+		shlExtraerTorqueY.setImage(SWTResourceManager.getImage(MainForm.class, "/geo/conekta/minth/csv_reader_mVe_icon.ico"));
 		shlExtraerTorqueY.setSize(962, 462);
 		shlExtraerTorqueY.setText("Extraer Presión, Compresión, Torque y \u00C1ngulo"); 
         
         Button btnSalir = new Button(shlExtraerTorqueY, SWT.NONE);
-        btnSalir.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+        btnSalir.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
         btnSalir.addSelectionListener(new SelectionAdapter() {
         	@Override
         	public void widgetSelected(SelectionEvent e) {
@@ -87,6 +87,7 @@ public class MainForm  {
         btnSalir.setVisible(false);
 		
         progressBar1 = new ProgressBar(shlExtraerTorqueY, SWT.HORIZONTAL);
+        progressBar1.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
         progressBar1.setMinimum(0);
         progressBar1.setBounds(795, 391, 151, 21);
         progressBar1.setVisible(false);
@@ -95,7 +96,7 @@ public class MainForm  {
 		txtExtraerDe.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		txtExtraerDe.setEditable(false);
 		txtExtraerDe.setEnabled(false);
-		txtExtraerDe.setText("D:\\DATOS CSV EXTRACTOR 2\\FILES X247 LH\\2017.11.23");
+		txtExtraerDe.setText("D:\\GEOPANDA\\archivos");
 		txtExtraerDe.setBounds(87, 76, 686, 35);
 		
 		Label lblNewLabel = new Label(shlExtraerTorqueY, SWT.NONE);
@@ -130,7 +131,7 @@ public class MainForm  {
 		Label lblArchivoLeido = new Label(shlExtraerTorqueY, SWT.NONE);
 		lblArchivoLeido.setLocation(39, 391);
 		lblArchivoLeido.setSize(645, 21);
-		lblArchivoLeido.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+		lblArchivoLeido.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblArchivoLeido.setText("Abriendo");
 		lblArchivoLeido.setVisible(false);
 		Button btnCambiarRuta = new Button(shlExtraerTorqueY, SWT.NONE);
@@ -196,6 +197,7 @@ public class MainForm  {
 		tltmManual.setText("Manual");
 		
 		text1 = new Text(shlExtraerTorqueY, SWT.BORDER);
+		text1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		text1.setBounds(857, 360, 76, 21);
 		text1.setVisible(false);
 	}
