@@ -127,7 +127,7 @@ public class ReadCsv extends Thread {
 //			arList.add(
 	//				"par de torsión perno_exterior_izq,ángulo perno_exterior_izq,par de torsión perno_interior_izq,ángulo perno_interior_izq,par de torsión perno_interior_drch,ángulo perno_interior_drch,par de torsión perno_exterior_drch,ángulo perno_exterior_drch,ruta archivo");
 			arList.add(
-					"p1O, p1, p2O, p2, p3O, p3, p4O, p4, p5O, p5, p6O, p6, c1O, c1, c2O, c2, c3O, c3, c4O, c4, c5O, c5, c6O, c6, t1, t2, t3, t4, t5, t6, a1, a2, a3, a4, a5, a6,ruta archivo");
+					"P1,P2,P3,P4,P5,P6,C1,C2,C3,C4,C5,C6,T1,T2,T3,T4,T5,T6,A1,A2,A3,A4,A5,A6,RUTA ARCHIVO");
 			flagHeader = true;
 		}
 		for (int x = 0; x < ficheros.length; x++) {
@@ -167,32 +167,38 @@ public class ReadCsv extends Thread {
 							case "Nieten 01 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
-								linea[0] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								//linea[0] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[0] =  String.format("%.1f", datoProcesado)+ ",";
 								break;
 							case "Nieten 02 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
-								linea[1] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								//linea[1] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[1] = String.format("%.1f", datoProcesado)+ ",";
 								break;
 							case "Nieten 03 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
-								linea[2] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								//linea[2] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[2] =  String.format("%.1f", datoProcesado)+ ",";
 								break;
 							case "Nieten 04 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
-								linea[3] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								//linea[3] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[3] =  String.format("%.1f", datoProcesado)+ ",";
 								break;
 							case "Nieten 05 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
-								linea[4] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								//linea[4] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[4] =  String.format("%.1f", datoProcesado)+ ",";
 								break;
 							case "Nieten 06 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
-								linea[5] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								//linea[5] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[5] =  String.format("%.1f", datoProcesado)+ ",";
 								break;
 								
 								// compresión Nieten 01 Spitzenwert Setzhub ... Nieten 06 Spitzenwert Setzhub
@@ -200,32 +206,38 @@ public class ReadCsv extends Thread {
 							case "Nieten 01 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) /100;
-								linea[6] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								//linea[6] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[6] = String.format("%.2f", datoProcesado)+ ",";
 								break;
 							case "Nieten 02 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) /100;
-								linea[7] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								//linea[7] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[7] = String.format("%.2f", datoProcesado)+ ",";
 								break;
 							case "Nieten 03 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) /100;
-								linea[8] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								//linea[8] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[8] = String.format("%.2f", datoProcesado)+ ",";
 								break;
 							case "Nieten 04 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) /100;
-								linea[9] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								//linea[9] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[9] =  String.format("%.2f", datoProcesado)+ ",";
 								break;
 							case "Nieten 05 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) /100;
-								linea[10] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								//linea[10] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[10] =  String.format("%.2f", datoProcesado)+ ",";
 								break;
 							case "Nieten 06 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
 								datoProcesado = Double.parseDouble(strar[1]) /100;
-								linea[11] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								//linea[11] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[11] =  String.format("%.2f", datoProcesado)+ ",";
 								break;
 								
 								//Torque Verschrauben 01 Drehmoment ... Verschrauben 06 Drehmoment
