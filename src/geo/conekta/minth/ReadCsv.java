@@ -124,8 +124,10 @@ public class ReadCsv extends Thread {
 
 		int i = 0;
 		if (!flagHeader) {
+//			arList.add(
+	//				"par de torsión perno_exterior_izq,ángulo perno_exterior_izq,par de torsión perno_interior_izq,ángulo perno_interior_izq,par de torsión perno_interior_drch,ángulo perno_interior_drch,par de torsión perno_exterior_drch,ángulo perno_exterior_drch,ruta archivo");
 			arList.add(
-					"par de torsión perno_exterior_izq,ángulo perno_exterior_izq,par de torsión perno_interior_izq,ángulo perno_interior_izq,par de torsión perno_interior_drch,ángulo perno_interior_drch,par de torsión perno_exterior_drch,ángulo perno_exterior_drch,ruta archivo");
+					"P1,P2,P3,P4,P5,P6,C1,C2,C3,C4,C5,C6,T1,T2,T3,T4,T5,T6,A1,A2,A3,A4,A5,A6,RUTA ARCHIVO");
 			flagHeader = true;
 		}
 		for (int x = 0; x < ficheros.length; x++) {
@@ -147,73 +149,165 @@ public class ReadCsv extends Thread {
 				try {
 					System.out.println(fName);
 					fis = new FileInputStream(fName);
-					linea = new String[8];
-					linea[0] = ",";
-					linea[1] = ",";
-					linea[2] = ",";
-					linea[3] = ",";
-					linea[4] = ",";
-					linea[5] = ",";
-					linea[6] = ",";
-					linea[7] = ",";
+					linea = new String[24];
+					for (int p=0 ; p < 24 ; p++) {
+						linea[p] = ",";
+					}
 					DataInputStream myInput = new DataInputStream(fis);
+					double datoProcesado = 0;
 					while ((thisLine = myInput.readLine()) != null) {
 						String strar[] = thisLine.split(";");
 						if (strar.length > 1) {
-							if (strar[0].equals("par de torsión perno_exterior_izq")
-									|| strar[0].equals("torque dowel pin_outside_left")
-									|| strar[0].equals("Drehmoment Stehbolzen_Aussen_Li")) {
+							
+							
+							switch (strar[0]) {
+							
+							// presión Nieten 01 Spitzenwert Setzdruck ... Nieten 06 Spitzenwert Setzdruck
+							
+							case "Nieten 01 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[0] = strar[1] + ",";
-							}
-							if (strar[0].equals("ángulo perno_exterior_izq")
-									|| strar[0].equals("angle dowel pin_outside_left")
-									|| strar[0].equals("Winkel Stehbolzen_Aussen_Li")) {
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								//linea[0] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[0] =  String.format("%.1f", datoProcesado)+ ",";
+								break;
+							case "Nieten 02 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[1] = strar[1] + ",";
-							}
-							if (strar[0].equals("par de torsión perno_interior_izq")
-									|| strar[0].equals("torque dowel pin_inside_left")
-									|| strar[0].equals("Drehmoment Stehbolzen_Innen_Li")) {
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								//linea[1] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[1] = String.format("%.1f", datoProcesado)+ ",";
+								break;
+							case "Nieten 03 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[2] = strar[1] + ",";
-							}
-							if (strar[0].equals("ángulo perno_interior_izq")
-									|| strar[0].equals("angle dowel pin_inside_left")
-									|| strar[0].equals("Winkel Stehbolzen_Innen_Li")) {
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								//linea[2] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[2] =  String.format("%.1f", datoProcesado)+ ",";
+								break;
+							case "Nieten 04 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[3] = strar[1] + ",";
-							}
-							if (strar[0].equals("par de torsión perno_interior_drch")
-									|| strar[0].equals("torque dowel pin_inside_right")
-									|| strar[0].equals("Drehmoment Stehbolzen_Innen_Re")) {
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								//linea[3] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[3] =  String.format("%.1f", datoProcesado)+ ",";
+								break;
+							case "Nieten 05 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[4] = strar[1] + ",";
-							}
-							if (strar[0].equals("ángulo perno_interior_drch")
-									|| strar[0].equals("angle dowel pin_inside_right")
-									|| strar[0].equals("Winkel Stehbolzen_Innen_Re")) {
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								//linea[4] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[4] =  String.format("%.1f", datoProcesado)+ ",";
+								break;
+							case "Nieten 06 Spitzenwert Setzdruck":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[5] = strar[1] + ",";
-							}
-							if (strar[0].equals("par de torsión perno_exterior_drch")
-									|| strar[0].equals("torque dowel pin_outside_right")
-									|| strar[0].equals("Drehmoment Stehbolzen_Aussen_Re")) {
+								datoProcesado = Double.parseDouble(strar[1]) * 0.1;
+								//linea[5] = strar[1] + "," + String.format("%.1f", datoProcesado)+ ",";
+								linea[5] =  String.format("%.1f", datoProcesado)+ ",";
+								break;
+								
+								// compresión Nieten 01 Spitzenwert Setzhub ... Nieten 06 Spitzenwert Setzhub
+								
+							case "Nieten 01 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[6] = strar[1] + ",";
-							}
-							if (strar[0].equals("ángulo perno_exterior_drch")
-									|| strar[0].equals("angle dowel pin_outside_right")
-									|| strar[0].equals("Winkel Stehbolzen_Aussen_Re")) {
+								datoProcesado = Double.parseDouble(strar[1]) /100;
+								//linea[6] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[6] = String.format("%.2f", datoProcesado)+ ",";
+								break;
+							case "Nieten 02 Spitzenwert Setzhub":
 								strar[1] = strar[1].replaceAll(",",".");
-								linea[7] = strar[1] + ",";
+								datoProcesado = Double.parseDouble(strar[1]) /100;
+								//linea[7] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[7] = String.format("%.2f", datoProcesado)+ ",";
+								break;
+							case "Nieten 03 Spitzenwert Setzhub":
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) /100;
+								//linea[8] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[8] = String.format("%.2f", datoProcesado)+ ",";
+								break;
+							case "Nieten 04 Spitzenwert Setzhub":
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) /100;
+								//linea[9] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[9] =  String.format("%.2f", datoProcesado)+ ",";
+								break;
+							case "Nieten 05 Spitzenwert Setzhub":
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) /100;
+								//linea[10] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[10] =  String.format("%.2f", datoProcesado)+ ",";
+								break;
+							case "Nieten 06 Spitzenwert Setzhub":
+								strar[1] = strar[1].replaceAll(",",".");
+								datoProcesado = Double.parseDouble(strar[1]) /100;
+								//linea[11] = strar[1] + "," + String.format("%.2f", datoProcesado)+ ",";
+								linea[11] =  String.format("%.2f", datoProcesado)+ ",";
+								break;
+								
+								//Torque Verschrauben 01 Drehmoment ... Verschrauben 06 Drehmoment
+								
+							case "Verschrauben 01 Drehmoment":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[12] = strar[1] + ",";
+								break;
+							case "Verschrauben 02 Drehmoment":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[13] = strar[1] + ",";
+								break;
+							case "Verschrauben 03 Drehmoment":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[14] = strar[1] + ",";
+								break;
+							case "Verschrauben 04 Drehmoment":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[15] = strar[1] + ",";
+								break;
+							case "Verschrauben 05 Drehmoment":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[16] = strar[1] + ",";
+								break;
+							case "Verschrauben 06 Drehmoment":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[17] = strar[1] + ",";
+								break;
+								
+								//Ángulo Verschrauben 01 Einschraubwinkel ... Verschrauben 06 Einschraubwinkel
+								
+							case "Verschrauben 01 Einschraubwinkel":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[18] = strar[1] + ",";
+								break;
+							case "Verschrauben 02 Einschraubwinkel":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[19] = strar[1] + ",";
+								break;
+							case "Verschrauben 03 Einschraubwinkel":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[20] = strar[1] + ",";
+								break;
+							case "Verschrauben 04 Einschraubwinkel":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[21] = strar[1] + ",";
+								break;
+							case "Verschrauben 05 Einschraubwinkel":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[22] = strar[1] + ",";
+								break;
+							case "Verschrauben 06 Einschraubwinkel":
+								strar[1] = strar[1].replaceAll(",",".");
+								linea[23] = strar[1] + ",";
+								break;
+								
+								// si no reconoce alguna columna
+								default:
+									System.out.println("Cabecera no identificada: " + strar[1]);
+									break;
+							
 							}
+														
 							i++;
 						}
 					}
-					myLine = myLine.concat(linea[0]).concat(linea[1]).concat(linea[2]).concat(linea[3]).concat(linea[4])
-							.concat(linea[5]).concat(linea[6]).concat(linea[7]);
-					System.out.println(myLine);
+					for (int p=0 ; p < 24 ; p++) {
+						myLine = myLine.concat(linea[p]);
+					}
+					myInput.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -304,7 +398,7 @@ public class ReadCsv extends Thread {
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
-
+							hwb.close();
 							statuslog = statuslog + " |  Hora Final: " + ft.format(myFecha);
 							statuslog = statuslog + "\nTiempo de Ejecución: " + tiempo;
 							String finalSize = size(countSize);
@@ -318,7 +412,6 @@ public class ReadCsv extends Thread {
 							statuslog = statuslog + "\nHora Final: " + ft.format(myFecha);
 							myOutput.setText(statuslog);
 						}
-
 						progressBar.setVisible(false);
 						text1.setVisible(false);
 						lblArchivoLeido.setVisible(false);

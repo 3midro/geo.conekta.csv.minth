@@ -25,7 +25,7 @@ public class MainForm  {
 	private Text txtExtraerDe;
 	public static Display display = Display.getDefault();
 
-	String selected = "c:\\csv2extract\\";
+	String selected = "D:\\DATOS CSV EXTRACTOR 2\\";
 	
 	public static Label myOutput;
 	public static ProgressBar progressBar1;
@@ -68,30 +68,52 @@ public class MainForm  {
 	 */
 	protected void createContents() {
 		shlExtraerTorqueY = new Shell(display,SWT.TITLE | SWT.CLOSE | SWT.BORDER);
-		shlExtraerTorqueY.setImage(SWTResourceManager.getImage(MainForm.class, "/geo/conekta/minth/ico48.ico"));
-		shlExtraerTorqueY.setSize(586, 321);
-		shlExtraerTorqueY.setText("Extraer Torque y \u00C1ngulo"); 
+		shlExtraerTorqueY.setImage(SWTResourceManager.getImage(MainForm.class, "/geo/conekta/minth/csv_reader_mVe_icon.ico"));
+		shlExtraerTorqueY.setSize(962, 462);
+		shlExtraerTorqueY.setText("Extraer Presión, Compresión, Torque y \u00C1ngulo"); 
+        
+        Button btnSalir = new Button(shlExtraerTorqueY, SWT.NONE);
+        btnSalir.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+        btnSalir.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+                if (myProcess != null) {
+                	myProcess.cancel();
+                }
+        	}
+        });
+        btnSalir.setBounds(690, 391, 99, 21);
+        btnSalir.setText("Cancelar");
+        btnSalir.setVisible(false);
+		
+        progressBar1 = new ProgressBar(shlExtraerTorqueY, SWT.HORIZONTAL);
+        progressBar1.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
+        progressBar1.setMinimum(0);
+        progressBar1.setBounds(795, 391, 151, 21);
+        progressBar1.setVisible(false);
 
 		txtExtraerDe = new Text(shlExtraerTorqueY, SWT.BORDER);
+		txtExtraerDe.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		txtExtraerDe.setEditable(false);
 		txtExtraerDe.setEnabled(false);
-		txtExtraerDe.setText("C:\\csv2extract");
-		txtExtraerDe.setBounds(75, 38, 336, 21);
+		txtExtraerDe.setText("D:\\GEOPANDA\\archivos");
+		txtExtraerDe.setBounds(87, 76, 686, 35);
 		
 		Label lblNewLabel = new Label(shlExtraerTorqueY, SWT.NONE);
-		lblNewLabel.setBounds(34, 41, 35, 15);
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblNewLabel.setBounds(39, 84, 40, 30);
 		lblNewLabel.setText("Ruta");
 		
 		ScrolledComposite scrolledComposite = new ScrolledComposite(shlExtraerTorqueY, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setToolTipText("Current action");
-		scrolledComposite.setBounds(75, 76, 459, 132);
+		scrolledComposite.setBounds(87, 139, 849, 213);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		
 		myOutput = new Label( scrolledComposite, SWT.NONE );
 		myOutput.setBackground( display.getSystemColor( SWT.COLOR_WHITE ) );
-		myOutput.setSize( 400, 400 );
 		scrolledComposite.setContent(myOutput);
+		scrolledComposite.setMinSize(myOutput.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 		Button btnProcesar = new Button(shlExtraerTorqueY, SWT.NONE);
 		//crea el directorio csv2extract si no existe
@@ -105,6 +127,13 @@ public class MainForm  {
         }			
 
 		DirectoryDialog fd = new DirectoryDialog(shlExtraerTorqueY, SWT.OPEN);
+		
+		Label lblArchivoLeido = new Label(shlExtraerTorqueY, SWT.NONE);
+		lblArchivoLeido.setLocation(39, 391);
+		lblArchivoLeido.setSize(645, 21);
+		lblArchivoLeido.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblArchivoLeido.setText("Abriendo");
+		lblArchivoLeido.setVisible(false);
 		Button btnCambiarRuta = new Button(shlExtraerTorqueY, SWT.NONE);
 		btnCambiarRuta.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1,0));
 		btnCambiarRuta.addSelectionListener(new SelectionAdapter() {
@@ -120,31 +149,8 @@ public class MainForm  {
 					System.out.println(selected);
 				}
 		});
-		btnCambiarRuta.setBounds(417, 36, 35, 25);
+		btnCambiarRuta.setBounds(794, 77, 35, 35);
 		btnCambiarRuta.setText("...");
-		
-        progressBar1 = new ProgressBar(shlExtraerTorqueY, SWT.HORIZONTAL);
-        progressBar1.setMinimum(0);
-        progressBar1.setVisible(false);
-        progressBar1.setBounds(337, 236, 115, 21); 
-        
-		Label lblArchivoLeido = new Label(shlExtraerTorqueY, SWT.NONE);
-		lblArchivoLeido.setBounds(28, 240, 303, 15);
-		lblArchivoLeido.setText("Abriendo");
-		lblArchivoLeido.setVisible(false);
-		
-		Button btnSalir = new Button(shlExtraerTorqueY, SWT.NONE);
-		btnSalir.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-                if (myProcess != null) {
-                	myProcess.cancel();
-                }
-			}
-		});
-		btnSalir.setBounds(458, 234, 76, 25);
-		btnSalir.setText("Cancelar");
-		btnSalir.setVisible(false);
 		
 		btnProcesar.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -160,18 +166,18 @@ public class MainForm  {
 					myProcess.start();
 			}
 		});
-		btnProcesar.setBounds(458, 36, 75, 25);
+		btnProcesar.setBounds(847, 77, 86, 35);
 		btnProcesar.setText("Procesar");
 		
 		Label lblLog = new Label(shlExtraerTorqueY, SWT.NONE);
-		lblLog.setBounds(34, 76, 35, 15);
+		lblLog.setBounds(39, 145, 35, 30);
 		lblLog.setText("Log");
 		
 
 		
 		ToolBar toolBar = new ToolBar(shlExtraerTorqueY, SWT.FLAT | SWT.RIGHT);
 		toolBar.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-		toolBar.setBounds(0, 0, 580, 23);
+		toolBar.setBounds(0, 0, 956, 35);
 		
 		ToolItem tltmManual = new ToolItem(toolBar, SWT.NONE);
 		tltmManual.addSelectionListener(new SelectionAdapter() {
@@ -191,7 +197,8 @@ public class MainForm  {
 		tltmManual.setText("Manual");
 		
 		text1 = new Text(shlExtraerTorqueY, SWT.BORDER);
-		text1.setBounds(160, 261, 76, 21);
+		text1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		text1.setBounds(857, 360, 76, 21);
 		text1.setVisible(false);
 	}
 }
